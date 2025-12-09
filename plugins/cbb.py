@@ -33,11 +33,25 @@ async def cb_handler(client: Bot, query: CallbackQuery):
        
     elif data == "trail":
         await query.message.edit_text(
-            text=HELP_TXT.format(first=query.from_user.first_name,mention=query.from_user.mention),
+            text=START_MSG.format(first=query.from_user.first_name,mention=query.from_user.mention),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
             [InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="about"), 
+             InlineKeyboardButton("• ʜᴇʟᴘ •", callback_data='help')],
+             [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data='close')],
+             [InlineKeyboardButton("• ᴅᴇᴠᴇʟᴏᴘᴇʀ •", url="https://t.me/Minato_Sencie")]
+              ]
+            )
+        )
+
+    elif data == "help":
+        await query.message.edit_text(
+            text=HELP_TXT.format(first=query.from_user.first_name),
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+            [InlineKeyboardButton("• ʙᴀᴄᴋ •", callback_data="trail"), 
              InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data='close')
             ], [InlineKeyboardButton("• ᴅᴇᴠᴇʟᴏᴘᴇʀ •", url="https://t.me/Minato_Sencie")
                ]
