@@ -59,6 +59,8 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             )
         )
 
+
+        # ========================= PREMIUM ========================= #
     elif data == "premium":
 
         await query.message.delete()
@@ -89,7 +91,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
                             url=SCREENSHOT_URL,
                         )
                     ],
-                    [InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data="close")],
+                    [InlineKeyboardButton("🔒 Close", callback_data="close")],
                 ]
             ),
         )
