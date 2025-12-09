@@ -223,8 +223,10 @@ async def start_command(client: Client, message: Message):
             [
                 [InlineKeyboardButton("• ᴄʜᴀɴɴᴇʟs •", url="https://t.me/Linkz_Wallah")],
                 [
-                    InlineKeyboardButton("• ᴀʙᴏᴜᴛ", callback_data="about"),
-                    InlineKeyboardButton("ʜᴇʟᴘ •", callback_data="help")
+            [InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="about"), 
+             InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data='close')
+            ], [InlineKeyboardButton("• ᴅᴇᴠᴇʟᴏᴘᴇʀ •", url="https://t.me/Minato_Sencie")
+               ]
                 ]
             ]
         )
