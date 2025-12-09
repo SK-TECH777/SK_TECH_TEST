@@ -33,7 +33,7 @@ async def cb_handler(client: Bot, query: CallbackQuery):
        
     elif data == "trail":
         await query.message.edit_text(
-            text=START_TXT.format(first=query.from_user.first_name),
+            text=HELP_TXT.format(first=query.from_user.first_name),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
