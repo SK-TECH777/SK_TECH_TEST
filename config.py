@@ -141,10 +141,10 @@ USER_REPLY_TEXT = "<b>For More Join - <a href='https://t.me/+AdcXPREPNEpkZmNl'>C
 
 #==========================(BUY PREMIUM)====================#
 
-OWNER_TAG = os.environ.get("OWNER_TAG", "@NeonGhost")
-UPI_ID = os.environ.get("UPI_ID", "kunaljaisinghpur@axl")
-QR_PIC = os.environ.get("QR_PIC", "https://graph.org/file/4b8cf54757ba84a23f000-880a704ce5057adffa.jpg")
-SCREENSHOT_URL = os.environ.get("SCREENSHOT_URL", f"@NGAdminRobot")
+OWNER_TAG = os.environ.get("OWNER_TAG", "Minato_Sencie")
+UPI_ID = os.environ.get("UPI_ID", "sanjaykingboy9597-1@okicici")
+QR_PIC = os.environ.get("QR_PIC", "https://files.catbox.moe/v81935.jpg")
+SCREENSHOT_URL = os.environ.get("SCREENSHOT_URL", f"https://t.me/Minato_Sencie")
 #--------------------------------------------
 #Time and its price
 #3 Days
