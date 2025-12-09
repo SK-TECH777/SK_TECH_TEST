@@ -219,17 +219,14 @@ async def start_command(client: Client, message: Message):
        
         return      
     else:
-        reply_markup = InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton("• ᴄʜᴀɴɴᴇʟs •", url="https://t.me/Linkz_Wallah")],
-                [
+        reply_markup = InlineKeyboardMarkup([
+            
+            [InlineKeyboardButton("• ᴄʜᴀɴɴᴇʟs •", url="https://t.me/Linkz_Wallah")],
             [InlineKeyboardButton("• ᴀʙᴏᴜᴛ •", callback_data="about"), 
-             InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data='close')
-            ], [InlineKeyboardButton("• ᴅᴇᴠᴇʟᴏᴘᴇʀ •", url="https://t.me/Minato_Sencie")
-               ]
-                ]
-            ]
-        )
+             InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data='close')],
+            [InlineKeyboardButton("• ᴅᴇᴠᴇʟᴏᴘᴇʀ •", url="https://t.me/Minato_Sencie")]
+        ]
+                                           )
 
     # ✅ temp delete before reply
     if 'temp' in locals():
