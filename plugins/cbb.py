@@ -22,16 +22,18 @@ async def cb_handler(client: Bot, query: CallbackQuery):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton('• ʜᴏᴍᴇ •', callback_data='trail'),
-                     InlineKeyboardButton('• ᴄʟᴏsᴇ •', callback_data='close')]
-                ]
+            [InlineKeyboardButton("• ʜᴏᴍᴇ •", callback_data="trail"), 
+             InlineKeyboardButton("• ᴄʟᴏsᴇ •", callback_data='close')
+            ], [InlineKeyboardButton("• ᴅᴇᴠᴇʟᴏᴘᴇʀ •", url="https://t.me/Minato_Sencie")
+               ]
+              ]
             )
         )
    
        
     elif data == "trail":
         await query.message.edit_text(
-            text=ABOUT_TXT.format(first=query.from_user.first_name),
+            text=START_MSG.format(first=query.from_user.first_name),
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
