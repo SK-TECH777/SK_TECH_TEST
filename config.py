@@ -19,20 +19,20 @@ from logging.handlers import RotatingFileHandler
 #--------------------------------------------
 #Bot token @Botfather
 TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
-APP_ID = int(os.environ.get("APP_ID", "24955235")) #Your API ID from my.telegram.org
-API_HASH = os.environ.get("API_HASH", "f317b3f7bbe390346d8b46868cff0de8") #Your API Hash from my.telegram.org
+APP_ID = int(os.environ.get("APP_ID", "22128383")) #Your API ID from my.telegram.org
+API_HASH = os.environ.get("API_HASH", "7992b5c5c9c6d34276c3dce9e46ba879") #Your API Hash from my.telegram.org
 #--------------------------------------------
 
-CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1002004278204")) #Your db channel Id
-OWNER = os.environ.get("OWNER", "NeonGhost") # Owner username without @
-OWNER_ID = int(os.environ.get("OWNER_ID", "5706788169")) # Owner id
+CHANNEL_ID = int(os.environ.get("CHANNEL_ID", "-1003494765620")) #Your db channel Id
+OWNER = os.environ.get("OWNER", "Minato_Sencie") # Owner username without @
+OWNER_ID = int(os.environ.get("OWNER_ID", "5960133511")) # Owner id
 #--------------------------------------------
 PORT = os.environ.get("PORT", "8080")
 #--------------------------------------------
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://teddugovardhan544_db_user:WVjIA96jQ31net0j@cluster0.kwkkleo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DB_NAME = os.environ.get("DATABASE_NAME", "nightrider")
+DB_NAME = os.environ.get("DATABASE_NAME", "SkTech")
 #--------------------------------------------
-FSUB_LINK_EXPIRY = int(os.getenv("FSUB_LINK_EXPIRY", "0"))  # 0 means no expiry
+FSUB_LINK_EXPIRY = int(os.getenv("FSUB_LINK_EXPIRY", "10"))  # 0 means no expiry
 BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/+VIFkh5jDpc0zYTE0")
 TG_BOT_WORKERS = int(os.environ.get("TG_BOT_WORKERS", "200"))
 #--------------------------------------------
