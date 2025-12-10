@@ -18,7 +18,7 @@ from logging.handlers import RotatingFileHandler
 #rohit_1888 on Tg
 #--------------------------------------------
 #Bot token @Botfather
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8362755803:AAEqWbAcQT6b_4QHszi4jYFV8hrmMS5RMVk")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8190176915:AAGtBxVb-GSqEHt1onsUwrTzH8Hjdu19D8g")
 APP_ID = int(os.environ.get("APP_ID", "22128383")) #Your API ID from my.telegram.org
 API_HASH = os.environ.get("API_HASH", "7992b5c5c9c6d34276c3dce9e46ba879") #Your API Hash from my.telegram.org
 #--------------------------------------------
@@ -30,8 +30,8 @@ ADMINS = [5960133511] # Admin IDs
 #--------------------------------------------
 PORT = os.environ.get("PORT", "8080")
 #--------------------------------------------
-DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://sktech007:sktech007@cluster0.utm4vj5.mongodb.net/?appName=Cluster0")
-DB_NAME = os.environ.get("DATABASE_NAME", "SkTech")
+DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://sktech07:sktech07@cluster0.0mmptus.mongodb.net/?appName=Cluster0")
+DB_NAME = os.environ.get("DATABASE_NAME", "SkAnime")
 #--------------------------------------------
 FSUB_LINK_EXPIRY = int(os.getenv("FSUB_LINK_EXPIRY", "10"))  # 0 means no expiry
 BAN_SUPPORT = os.environ.get("BAN_SUPPORT", "https://t.me/+NLK4xk9F_YYzM2I1")
@@ -46,7 +46,7 @@ VERIFY_MODE = os.environ.get("VERIFY_MODE", "True").lower() == "true"
 SHORTLINK_URL = os.environ.get("SHORTLINK_URL", "vplink.in")
 SHORTLINK_API = os.environ.get("SHORTLINK_API", "8a97662a9011593aca4eba9e00a5b93b5267b21c")
 VERIFY_EXPIRE = int(os.environ.get('VERIFY_EXPIRE', 64800)) # Add time in seconds
-TUT_VID = os.environ.get("TUT_VID","https://t.me/HTODLINKZ/2")
+TUT_VID = os.environ.get("TUT_VID","https://t.me/Naruto_backup_1/9")
 
 #--------------------------------------------
 
@@ -149,16 +149,16 @@ QR_PIC = os.environ.get("QR_PIC", "https://files.catbox.moe/v81935.jpg")
 SCREENSHOT_URL = os.environ.get("SCREENSHOT_URL", f"https://t.me/Minato_Sencie")
 #--------------------------------------------
 #Time and its price
-#3 Days
-PRICE1 = os.environ.get("PRICE1", "15 rs")
 #7 Days
-PRICE2 = os.environ.get("PRICE2", "30 rs")
+PRICE1 = os.environ.get("PRICE1", "40 rs")
 #1 Month
-PRICE3 = os.environ.get("PRICE3", "60 rs")
-#2 Month
-PRICE4 = os.environ.get("PRICE4", "90 rs")
+PRICE2 = os.environ.get("PRICE2", "100 rs")
 #3 Month
-PRICE5 = os.environ.get("PRICE5", "120 rs")
+PRICE3 = os.environ.get("PRICE3", "280 rs")
+#6 Month
+PRICE4 = os.environ.get("PRICE4", "480 rs")
+#1 Year
+PRICE5 = os.environ.get("PRICE5", "880 rs")
 
 #===================(END)========================#
 
