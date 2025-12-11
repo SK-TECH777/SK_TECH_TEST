@@ -261,5 +261,21 @@ class Rohit:
         result = await self.sex_data.aggregate(pipeline).to_list(length=1)
         return result[0]["total"] if result else 0
 
+# ==========================
+    #   VERIFY MODE (ON / OFF)
+    # ==========================
+    async def get_val(self, key: str):
+        """Fetch verify mode value from settings collection."""
+        data = await self.database["settings"].find_one({"_id": key})
+        return data["value"] if data else False
+
+    async def update_val(self, key: str, value):
+        """Update verify mode value."""
+        await self.database["settings"].update_one(
+            {"_id": key},
+            {"$set": {"value": value}},
+            upsert=True
+        )
+
 
 db = Rohit(DB_URI, DB_NAME)
