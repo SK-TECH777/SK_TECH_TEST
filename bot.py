@@ -13,7 +13,7 @@
 
 from aiohttp import web
 from plugins import web_server
-from plugins import verify_settings
+from plugins import verify_settings.py
 import asyncio
 import pyromod.listen
 from pyrogram import Client
