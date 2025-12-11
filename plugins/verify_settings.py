@@ -1,4 +1,4 @@
-from bot import Bot
+from bot import app
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from config import OWNER_ID, get_verify_mode_value, set_verify_mode_value
@@ -7,7 +7,7 @@ TOGGLE = "verify_toggle_829374"
 CLOSE = "verify_close_829374"
 
 
-@Bot.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
+@app.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
 async def verify_settings_cmd(client, message):
     mode = get_verify_mode_value()
 
@@ -22,7 +22,7 @@ async def verify_settings_cmd(client, message):
     )
 
 
-@Bot.on_callback_query(filters.regex(f"^{TOGGLE}$"))
+@app.on_callback_query(filters.regex(f"^{TOGGLE}$"))
 async def toggle_verify(client, query: CallbackQuery):
     if query.from_user.id != OWNER_ID:
         return await query.answer("Owner only!", show_alert=True)
@@ -44,7 +44,7 @@ async def toggle_verify(client, query: CallbackQuery):
     )
 
 
-@Bot.on_callback_query(filters.regex(f"^{CLOSE}$"))
+@app.on_callback_query(filters.regex(f"^{CLOSE}$"))
 async def close_panel(client, query: CallbackQuery):
     await query.answer()
     await query.message.delete()
