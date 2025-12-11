@@ -25,7 +25,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated, User
 from bot import Bot
 from config import *
 from helper_func import *
-from database.database import *
+from database import *
 
 #=====================================================================================##
 
@@ -75,58 +75,7 @@ async def get_users(client: Bot, message: Message):
 #=====================================================================================##
 
 
-@Bot.on_message(filters.command('shortner') & filters.private & admin)
-async def shortner_command(client: Bot, message: Message):
-    await shortner_panel(client, message)
 
-
-async def shortner_panel(client, query_or_message):
-    # Get current shortner settings
-    short_url = getattr(client, 'short_url', SHORTLINK_URL)
-    short_api = getattr(client, 'short_api', SHORTLINK_API)
-    tutorial_link = getattr(client, 'tutorial_link', "https://t.me/How_to_Download_7x/26")
-    shortner_enabled = getattr(client, 'shortner_enabled', True)
-    
-    # Check if shortner is working (only if enabled)
-    if shortner_enabled:
-        try:
-            test_response = requests.get(f"https://{short_url}/api?api={short_api}&url=https://google.com&alias=test", timeout=5)
-            status = "✓ ᴡᴏʀᴋɪɴɢ" if test_response.status_code == 200 else "✗ ɴᴏᴛ ᴡᴏʀᴋɪɴɢ"
-        except:
-            status = "✗ ɴᴏᴛ ᴡᴏʀᴋɪɴɢ"
-    else:
-        status = "✗ ᴅɪsᴀʙʟᴇᴅ"
-    
-    enabled_text = "✓ ᴇɴᴀʙʟᴇᴅ" if shortner_enabled else "✗ ᴅɪsᴀʙʟᴇᴅ"
-    toggle_text = "✗ ᴏғғ" if shortner_enabled else "✓ ᴏɴ"
-    
-    msg = f"""<blockquote>✦ 𝗦𝗛𝗢𝗥𝗧𝗡𝗘𝗥 𝗦𝗘𝗧𝗧𝗜𝗡𝗚𝗦</blockquote>
-**<u>ᴄᴜʀʀᴇɴᴛ ꜱᴇᴛᴛɪɴɢꜱ:</u>**
-<blockquote>›› **ꜱʜᴏʀᴛɴᴇʀ ꜱᴛᴀᴛᴜꜱ:** {enabled_text}
-›› **ꜱʜᴏʀᴛɴᴇʀ ᴜʀʟ:** `{short_url}`
-›› **ꜱʜᴏʀᴛɴᴇʀ ᴀᴘɪ:** `{short_api}`</blockquote> 
-<blockquote>›› **ᴛᴜᴛᴏʀɪᴀʟ ʟɪɴᴋ:** `{tutorial_link}`
-›› **ᴀᴘɪ ꜱᴛᴀᴛᴜꜱ:** {status}</blockquote>
-
-<blockquote>**≡ ᴜꜱᴇ ᴛʜᴇ ʙᴜᴛᴛᴏɴꜱ ʙᴇʟᴏᴡ ᴛᴏ ᴄᴏɴꜰɪɢᴜʀᴇ ʏᴏᴜʀ ꜱʜᴏʀᴛɴᴇʀ ꜱᴇᴛᴛɪɴɢꜱ!**</blockquote>"""
-    
-    reply_markup = InlineKeyboardMarkup([
-        [InlineKeyboardButton(f'• {toggle_text} ꜱʜᴏʀᴛɴᴇʀ •', 'toggle_shortner'), InlineKeyboardButton('• ᴀᴅᴅ ꜱʜᴏʀᴛɴᴇʀ •', 'add_shortner')],
-        [InlineKeyboardButton('• ꜱᴇᴛ ᴛᴜᴛᴏʀɪᴀʟ ʟɪɴᴋ •', 'set_tutorial_link')],
-        [InlineKeyboardButton('• ᴛᴇꜱᴛ ꜱʜᴏʀᴛɴᴇʀ •', 'test_shortner')],
-        [InlineKeyboardButton('◂ ʙᴀᴄᴋ ᴛᴏ ꜱᴇᴛᴛɪɴɢꜱ', 'settings')] if hasattr(query_or_message, 'message') else []
-    ])
-    
-    image_url = MESSAGES.get("SHORT", "https://telegra.ph/file/8aaf4df8c138c6685dcee-05d3b183d4978ec347.jpg")
-    
-    if hasattr(query_or_message, 'message'):
-        await query_or_message.message.edit_media(
-            media=InputMediaPhoto(media=image_url, caption=msg),
-            reply_markup=reply_markup
-        )
-    else:
-        await query_or_message.reply_photo(photo=image_url, caption=msg, reply_markup=reply_markup)
-        
 
 
 #=====================================================================================##
