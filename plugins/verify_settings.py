@@ -1,49 +1,56 @@
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
-from config import OWNER_ID, get_verify_mode_value, set_verify_mode_value
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
+from database import db
 
-TOGGLE = "verify_toggle_982734"
-CLOSE = "verify_close_982734"
+VERIFY_KEY = "VERIFY_MODE"
 
-
-@Client.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
+@Client.on_message(filters.command("verifysettings") & filters.private)
 async def verify_settings_cmd(client, message):
-    mode = get_verify_mode_value()
+    data = await db.get_val(VERIFY_KEY)
+    status = "ON" if data else "OFF"
 
-    btn = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Turn OFF" if mode else "Turn ON", callback_data=TOGGLE)],
-        [InlineKeyboardButton("Close", callback_data=CLOSE)],
-    ])
+    keyboard = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton(
+                "Turn OFF" if data else "Turn ON",
+                callback_data="toggle_verify")
+            ],
+            [InlineKeyboardButton("Close", callback_data="close_verify")]
+        ]
+    )
 
-    await message.reply_text(
-        f"🔐 VERIFY MODE is currently: <b>{'ON' if mode else 'OFF'}</b>",
-        reply_markup=btn
+    await message.reply(
+        f"🔒 VERIFY MODE is currently: **{status}**",
+        reply_markup=keyboard
     )
 
 
-@Client.on_callback_query(filters.regex(f"^{TOGGLE}$"))
-async def toggle_verify_cb(client, query: CallbackQuery):
-    await query.answer()
+@Client.on_callback_query(filters.regex("^toggle_verify$"))
+async def toggle_verify_cb(client, query):
+    current = await db.get_val(VERIFY_KEY)
+    new_state = not current
 
-    if query.from_user.id != OWNER_ID:
-        return await query.answer("Owner only!", show_alert=True)
+    await db.update_val(VERIFY_KEY, new_state)
 
-    mode = get_verify_mode_value()
-    new = not mode
-    set_verify_mode_value(new)
+    new_text = "ON" if new_state else "OFF"
+    new_button = "Turn OFF" if new_state else "Turn ON"
 
-    btn = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Turn OFF" if new else "Turn ON", callback_data=TOGGLE)],
-        [InlineKeyboardButton("Close", callback_data=CLOSE)],
-    ])
+    keyboard = InlineKeyboardMarkup(
+        [
+            [InlineKeyboardButton(new_button, callback_data="toggle_verify")],
+            [InlineKeyboardButton("Close", callback_data="close_verify")]
+        ]
+    )
 
     await query.message.edit_text(
-        f"🔐 VERIFY MODE updated to: <b>{'ON' if new else 'OFF'}</b>",
-        reply_markup=btn
+        f"🔒 VERIFY MODE is now: **{new_text}**",
+        reply_markup=keyboard
     )
 
+    await query.answer("Updated!", show_alert=False)
 
-@Client.on_callback_query(filters.regex(f"^{CLOSE}$"))
-async def close_cb(client, query: CallbackQuery):
-    await query.answer()
+
+@Client.on_callback_query(filters.regex("^close_verify$"))
+async def close_verify_cb(client, query):
     await query.message.delete()
+    await query.answer()
