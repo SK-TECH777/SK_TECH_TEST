@@ -124,13 +124,7 @@ class Bot(Client):
         finally:
             loop.run_until_complete(self.stop())
 
-      if __name__ == "__main__":
-        Bot().run()
-#
-# Copyright (C) 2025 by Codeflix-Bots@Github, < https://github.com/Codeflix-Bots >.
-#
-# This file is part of < https://github.com/Codeflix-Bots/FileStore > project,
-# and is released under the MIT License.
-# Please see < https://github.com/Codeflix-Bots/FileStore/blob/master/LICENSE >
-#
-# All rights reserved.
+
+# 👇 ADD THIS EXACTLY LIKE THIS (LEFT SIDE, NO SPACES)
+if __name__ == "__main__":
+    Bot().run()
