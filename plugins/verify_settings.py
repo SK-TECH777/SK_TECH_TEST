@@ -17,7 +17,7 @@ async def verify_settings_cmd(client, message: Message):
     await message.reply_text(
         f"🔐 VERIFY MODE is currently: **{'ON' if mode else 'OFF'}**",
         reply_markup=kb,
-        parse_mode="html"
+        parse_mode="HTML"
     )
 
 @Client.on_callback_query(filters.regex("^toggle_verify$"))
@@ -31,5 +31,5 @@ async def toggle_verify_cb(client, query: CallbackQuery):
     await query.message.edit_text(
         f"✅ VERIFY MODE updated to: **{'ON' if new else 'OFF'}**",
         reply_markup=kb,
-        parse_mode="html"
+        parse_mode="HTML"
     )
