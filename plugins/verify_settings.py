@@ -1,47 +1,40 @@
 # Verify settings toggler
 # Accessible only to OWNER_ID
 
-from bot import Bot
-from pyrogram import filters
+from pyrogram import Client, filters
 from pyrogram.enums import ParseMode
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, Message
-
 from config import OWNER_ID, get_verify_mode_value, set_verify_mode_value
 
 
-@Bot.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
+@Client.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
 async def verify_settings_cmd(client, message: Message):
     mode = get_verify_mode_value()
-    kb = InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("Turn OFF" if mode else "Turn ON",
-                                  callback_data="toggle_verify")],
-            [InlineKeyboardButton("Close", callback_data="close")]
-        ]
-    )
+
+    kb = InlineKeyboardMarkup([
+        [InlineKeyboardButton("Turn OFF" if mode else "Turn ON", callback_data="toggle_verify")],
+        [InlineKeyboardButton("Close", callback_data="close")]
+    ])
 
     await message.reply_text(
-        f"🔐 VERIFY MODE is currently: **{'ON' if mode else 'OFF'}**",
+        f"🔐 VERIFY MODE is currently: <b>{'ON' if mode else 'OFF'}</b>",
         reply_markup=kb,
         parse_mode=ParseMode.HTML
     )
 
 
-@Bot.on_callback_query(filters.regex("^toggle_verify$"))
+@Client.on_callback_query(filters.regex("^toggle_verify$"))
 async def toggle_verify_cb(client, query: CallbackQuery):
     mode = get_verify_mode_value()
-    new = not mode
-    set_verify_mode_value(new)
+    new_mode = not mode
+    set_verify_mode_value(new_mode)
 
-    kb = InlineKeyboardMarkup(
-        [
-            [InlineKeyboardButton("Turn OFF" if new else "Turn ON",
-                                  callback_data="toggle_verify")]
-        ]
-    )
+    kb = InlineKeyboardMarkup([
+        [InlineKeyboardButton("Turn OFF" if new_mode else "Turn ON", callback_data="toggle_verify")]
+    ])
 
     await query.message.edit_text(
-        f"✅ VERIFY MODE updated to: **{'ON' if new else 'OFF'}**",
+        f"✅ VERIFY MODE updated to: <b>{'ON' if new_mode else 'OFF'}</b>",
         reply_markup=kb,
         parse_mode=ParseMode.HTML
     )
