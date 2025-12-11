@@ -1,49 +1,50 @@
 from bot import Bot
-from pyrogram.enums import ParseMode
-from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery
 from config import OWNER_ID, get_verify_mode_value, set_verify_mode_value
 
-
-TOGGLE = "verify_toggle_239487"
-CLOSE = "verify_close_239487"
+TOGGLE = "verify_toggle_829374"
+CLOSE = "verify_close_829374"
 
 
 @Bot.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
 async def verify_settings_cmd(client, message):
     mode = get_verify_mode_value()
 
-    buttons = InlineKeyboardMarkup([
+    btn = InlineKeyboardMarkup([
         [InlineKeyboardButton("Turn OFF" if mode else "Turn ON", callback_data=TOGGLE)],
         [InlineKeyboardButton("Close", callback_data=CLOSE)]
     ])
 
     await message.reply_text(
         f"🔐 VERIFY MODE is currently: <b>{'ON' if mode else 'OFF'}</b>",
-        reply_markup=buttons,
-        parse_mode=ParseMode.HTML
+        reply_markup=btn
     )
 
 
 @Bot.on_callback_query(filters.regex(f"^{TOGGLE}$"))
-async def toggle_cb(client, query: CallbackQuery):
+async def toggle_verify(client, query: CallbackQuery):
+    if query.from_user.id != OWNER_ID:
+        return await query.answer("Owner only!", show_alert=True)
+
     await query.answer()
 
-    mode = get_verify_mode_value()
-    new = not mode
+    curr = get_verify_mode_value()
+    new = not curr
     set_verify_mode_value(new)
 
-    buttons = InlineKeyboardMarkup([
-        [InlineKeyboardButton("Turn OFF" if new else "Turn ON", callback_data=TOGGLE)]
+    btn = InlineKeyboardMarkup([
+        [InlineKeyboardButton("Turn OFF" if new else "Turn ON", callback_data=TOGGLE)],
+        [InlineKeyboardButton("Close", callback_data=CLOSE)]
     ])
 
     await query.message.edit_text(
-        f"✅ VERIFY MODE updated to: <b>{'ON' if new else 'OFF'}</b>",
-        reply_markup=buttons,
-        parse_mode=ParseMode.HTML
+        f"🔐 VERIFY MODE updated to: <b>{'ON' if new else 'OFF'}</b>",
+        reply_markup=btn
     )
 
 
 @Bot.on_callback_query(filters.regex(f"^{CLOSE}$"))
-async def close_cb(client, query: CallbackQuery):
+async def close_panel(client, query: CallbackQuery):
     await query.answer()
     await query.message.delete()
