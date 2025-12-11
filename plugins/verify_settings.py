@@ -1,19 +1,21 @@
 # Verify settings toggler
 # Accessible only to OWNER_ID
 
-from pyrogram import Client, filters
+from bot import Bot
+from pyrogram import filters
 from pyrogram.enums import ParseMode
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, CallbackQuery, Message
+
 from config import OWNER_ID, get_verify_mode_value, set_verify_mode_value
 
 
-@Client.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
+@Bot.on_message(filters.command("verifysettings") & filters.private & filters.user(OWNER_ID))
 async def verify_settings_cmd(client, message: Message):
     mode = get_verify_mode_value()
-
     kb = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("Turn OFF" if mode else "Turn ON", callback_data="toggle_verify")],
+            [InlineKeyboardButton("Turn OFF" if mode else "Turn ON",
+                                  callback_data="toggle_verify")],
             [InlineKeyboardButton("Close", callback_data="close")]
         ]
     )
@@ -25,16 +27,16 @@ async def verify_settings_cmd(client, message: Message):
     )
 
 
-@Client.on_callback_query(filters.regex("^toggle_verify$"))
+@Bot.on_callback_query(filters.regex("^toggle_verify$"))
 async def toggle_verify_cb(client, query: CallbackQuery):
     mode = get_verify_mode_value()
     new = not mode
-
     set_verify_mode_value(new)
 
     kb = InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton("Turn OFF" if new else "Turn ON", callback_data="toggle_verify")]
+            [InlineKeyboardButton("Turn OFF" if new else "Turn ON",
+                                  callback_data="toggle_verify")]
         ]
     )
 
